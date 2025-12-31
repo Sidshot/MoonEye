@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoonEye</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="popup">
+    <!-- Brand Header -->
+    <header class="brand-header">
+      <div class="brand">
+        <span class="brand-icon">🌙</span>
+        <span class="brand-name">MoonEye</span>
+      </div>
+      <button class="power-toggle active" id="power-toggle">
+        <svg class="power-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+          <path d="M12 2v10" />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Current Site -->
+    <div class="site-info glass-card">
+      <span class="site-status" id="status-label">●</span>
+      <span class="site-name" id="site-label">Loading...</span>
+      <button class="whitelist-toggle" id="btn-whitelist">Whitelist</button>
+    </div>
+
+    <!-- Mode Switch -->
+    <div class="mode-selector glass-card">
+      <button class="mode-btn active" id="btn-auto">Auto</button>
+      <button class="mode-btn" id="btn-manual">Manual</button>
+    </div>
+
+    <!-- Presets (Auto Mode) -->
+    <div class="presets-section" id="presets-section">
+      <div class="preset-buttons">
+        <button class="preset-btn" id="preset-bw"><span>◐</span>B&W</button>
+        <button class="preset-btn active" id="preset-bluelight"><span>🌙</span>Night</button>
+        <button class="preset-btn" id="preset-midnight"><span>🌑</span>Deep</button>
+      </div>
+    </div>
+
+    <!-- Manual Sliders -->
+    <div class="controls glass-card hidden" id="controls">
+      <div class="slider-row">
+        <label>Brightness</label>
+        <input type="range" id="brightness" min="50" max="150" value="100">
+        <span id="brightness-val">100%</span>
+      </div>
+      <div class="slider-row">
+        <label>Warmth</label>
+        <input type="range" id="sepia" min="0" max="100" value="0">
+        <span id="sepia-val">0%</span>
+      </div>
+      <div class="slider-row">
+        <label>Contrast</label>
+        <input type="range" id="contrast" min="50" max="150" value="100">
+        <span id="contrast-val">100%</span>
+      </div>
+      <div class="slider-row">
+        <label>Grayscale</label>
+        <input type="range" id="grayscale" min="0" max="100" value="0">
+        <span id="grayscale-val">0%</span>
+      </div>
+    </div>
+
+    <!-- Blue Light Filter -->
+    <div class="bluelight-section glass-card">
+      <div class="bluelight-header">
+        <span>💡 Blue Light Filter</span>
+        <span id="bluelight-val">0%</span>
+      </div>
+      <input type="range" id="bluelight" min="0" max="100" value="0">
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row glass-card">
+      <div class="stat"><strong id="stat-sites">0</strong><span>Sites</span></div>
+      <div class="stat"><strong id="stat-time">0h</strong><span>Protected</span></div>
+      <div class="stat"><strong>v1.0</strong><span>Version</span></div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <button class="action-btn" id="btn-reset">↺ Reset</button>
+      <button class="action-btn" id="btn-schedule">⏰ Schedule</button>
+      <button class="action-btn" id="btn-settings">⚙ Settings</button>
+    </div>
+
+    <!-- Keyboard Hint -->
+    <div class="shortcut-hint"><kbd>Alt</kbd>+<kbd>D</kbd> to toggle</div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+/* 
+  Smart Dark Mode - Core CSS
+  
+  RENDER MODES:
+  - pure_filter: data-sdm-native-dark="true" → Brightness/Contrast only
+  - selective_inversion: data-sdm-native-dark="false" → Invert + restore media
+  - hard_off: No data-sdm-enabled attribute → Nothing applied
+*/
+
+:root {
+  --sdm-brightness: 100%;
+  --sdm-contrast: 100%;
+  --sdm-sepia: 0%;
+  --sdm-grayscale: 0%;
+  --sdm-blue-filter: 0%;
+}
+
+/* ==================== ENABLED STATE ==================== */
+
+html[data-sdm-enabled="true"] {
+  transition: filter 0.3s ease !important;
+}
+
+/* 
+  MODE 1: Selective Inversion (Light Sites)
+  Invert the page, restore media
+*/
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] {
+  filter:
+    invert(1) hue-rotate(180deg) brightness(var(--sdm-brightness)) contrast(var(--sdm-contrast)) sepia(var(--sdm-sepia)) grayscale(var(--sdm-grayscale)) !important;
+  background-color: white !important;
+}
+
+/* Restore media (double-invert) */
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] img,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] picture,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] video,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] canvas,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] svg:not([class*="icon"]),
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] iframe {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* Background images - invert container but not nested img inside */
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] [style*="background-image"]:not(html):not(body):not(img):not(picture):not(video) {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* CRITICAL: Prevent double-inversion of images inside already-inverted containers */
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] [style*="background-image"] img,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] [style*="background-image"] picture,
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] [style*="background-image"] video {
+  filter: none !important;
+}
+
+/* 
+  MODE 2: Pure Filter (Dark Sites)
+  No inversion, just brightness/contrast adjustments
+*/
+html[data-sdm-enabled="true"][data-sdm-native-dark="true"] {
+  filter:
+    brightness(var(--sdm-brightness)) contrast(var(--sdm-contrast)) sepia(var(--sdm-sepia)) grayscale(var(--sdm-grayscale)) !important;
+}
+
+/* 
+  BLUE LIGHT FILTER (Overlay Method)
+  Applied via a pseudo-element to avoid stacking with inversion
+*/
+html[data-sdm-enabled="true"]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(255, 180, 50);
+  opacity: calc(var(--sdm-blue-filter-raw, 0) * 0.002);
+  pointer-events: none;
+  z-index: 2147483647;
+  mix-blend-mode: multiply;
+}
+
+/* ==================== FORCE WHITE BACKGROUND ==================== */
+html[data-sdm-enabled="true"][data-sdm-native-dark="false"] body {
+  background-color: white !important;
+}
