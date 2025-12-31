@@ -1,88 +1,84 @@
 # MoonEye
 
-A browser extension that intelligently applies dark mode to any website, reducing eye strain and improving readability in low-light environments.
+A smart dark mode browser extension that intelligently applies dark mode to any website, reducing eye strain and improving readability in low-light environments.
+
+## Download
+
+**[Download Latest Release (v1.0.0)](https://github.com/sidshot/MoonEye/releases/download/v1.0.0/MoonEye-v1.0.0.zip)**
+
+## Installation
+
+1. Download `MoonEye-v1.0.0.zip` from the Releases section
+2. Extract the zip file to a folder
+3. Open your browser's extension page:
+   - Chrome: `chrome://extensions`
+   - Brave: `brave://extensions`
+   - Edge: `edge://extensions`
+4. Enable **Developer mode** (toggle in top-right)
+5. Click **Load unpacked**
+6. Select the extracted folder
+7. MoonEye icon will appear in your toolbar
 
 ## Features
 
 ### Intelligent Dark Mode
 - Automatic detection of native dark mode support
 - Selective inversion for light-themed websites
-- Preserves images, videos, and media in their original colors
+- Preserves images, videos, and media in original colors
 
 ### Customizable Presets
 - **B&W Mode**: High contrast grayscale for focused reading
-- **Night Mode**: Warm tones with reduced brightness
+- **Night Mode**: Warm tones with reduced brightness (default)
 - **Deep Mode**: Maximum darkness with subtle warmth
 
 ### Blue Light Filter
-- Independent blue light reduction slider (0-100%)
-- Orange overlay that reduces eye strain during night use
+- Independent slider (0-100%)
+- Orange overlay reducing eye strain at night
 - Works alongside dark mode filters
 
 ### Manual Control
-- Brightness adjustment (50-150%)
-- Contrast control (50-150%)
-- Warmth/Sepia filter (0-100%)
-- Grayscale intensity (0-100%)
+- Brightness (50-150%)
+- Contrast (50-150%)
+- Warmth/Sepia (0-100%)
+- Grayscale (0-100%)
 
 ### Per-Site Settings
 - Whitelist specific websites
-- Settings persist across browser sessions
+- Settings persist across sessions
 - Real-time updates without page refresh
-
-## Installation
-
-### From Source
-1. Clone this repository
-2. Open your browser's extension management page
-   - Chrome: `chrome://extensions`
-   - Brave: `brave://extensions`
-   - Edge: `edge://extensions`
-3. Enable "Developer mode"
-4. Click "Load unpacked" and select the extension directory
-
-### From Release
-Download the latest release from the Releases page and follow the installation instructions above.
 
 ## Usage
 
-1. Click the MoonEye icon in your browser toolbar
-2. Toggle the power button to enable/disable
-3. Select a preset (B&W, Night, or Deep) for quick setup
+1. Click the MoonEye icon in your toolbar
+2. Toggle power button to enable/disable
+3. Select a preset (B&W, Night, or Deep)
 4. Use Manual mode for fine-grained control
-5. Adjust the Blue Light Filter slider as needed
-6. Click "Whitelist" to disable on specific sites
+5. Adjust Blue Light Filter as needed
+6. Click Whitelist to disable on specific sites
 
 ### Keyboard Shortcut
-- `Alt + D` - Toggle extension on/off (coming soon)
+- `Alt + D` - Toggle extension (coming soon)
 
 ## Technical Details
 
-### Architecture
+### File Structure
 ```
 MoonEye/
-├── manifest.json          # Extension configuration
+├── manifest.json
 ├── background/
-│   └── service_worker.js  # State management and messaging
+│   └── service_worker.js
 ├── content/
-│   ├── engine.js          # DOM manipulation and filter application
-│   └── styles.css         # CSS filters and dark mode rules
+│   ├── engine.js
+│   └── styles.css
 ├── popup/
-│   ├── popup.html         # Extension UI
-│   ├── style.css          # Glassmorphism styling
-│   └── script.js          # UI logic and state handling
+│   ├── popup.html
+│   ├── style.css
+│   └── script.js
 └── icons/
     ├── icon16.png
     ├── icon48.png
     └── icon128.png
 ```
-
-### How It Works
-1. Content script injects at `document_start` to prevent flash of white
-2. Service worker maintains global state and broadcasts updates
-3. Dark mode is applied using CSS `filter: invert(1) hue-rotate(180deg)`
-4. Media elements are reverse-inverted to preserve original colors
-5. Blue light filter uses a fixed overlay with `mix-blend-mode: multiply`
 
 ### Browser Compatibility
 - Google Chrome (Manifest V3)
@@ -90,33 +86,25 @@ MoonEye/
 - Microsoft Edge
 - Other Chromium-based browsers
 
-## Permissions
-
-- `storage` - Save user preferences
-- `tabs` - Apply settings to active tab
-- `alarms` - Periodic state synchronization
-- `activeTab` - Access current page for dark mode application
+### Permissions
+- `storage` - Save preferences
+- `tabs` - Apply to active tab
+- `alarms` - State sync
+- `activeTab` - Page access
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/name`)
+3. Commit changes (`git commit -am 'Add feature'`)
+4. Push branch (`git push origin feature/name`)
+5. Open Pull Request
 
 ## License
 
-MIT License - see LICENSE file for details.
-
-## Acknowledgments
-
-- Inspired by dark mode extensions like Dark Reader
-- Uses CSS filter-based inversion technique
-- Glassmorphism UI design principles
+MIT License
 
 ---
 
 **Version**: 1.0.0  
-**Author**: [Your Name]  
-**Repository**: [GitHub URL]
+**Author**: sidshot
